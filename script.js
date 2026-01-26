@@ -51,7 +51,7 @@ function updateN(arg) {
 
 // update content in calculation header
 function updateContent(arg, reset) {
-    if (reset === true) {
+    if (reset) {
         calculationHeader.innerHTML = arg.toString();
     } else {
         calculationHeader.innerHTML += arg.toString();
@@ -59,32 +59,38 @@ function updateContent(arg, reset) {
 }
 
 // reset var to undefined
-function reset() {
-    n1 = undefined;
-    operator = undefined;
-    n2 = undefined;
+function reset(isAns) {
+    if (isAns) {
+        operator = undefined;
+        n2 = undefined;
+    } else {
+        n1 = undefined;
+        operator = undefined;
+        n2 = undefined;
+    }
 }
 
 // clear all var and calculation header
 function clear() {
     calculationHeader.innerHTML = '';
-    reset();
+    reset(false);
 }
 
 // operate calculations depending on operator
-function operate(n1, n2, operator) {
+function operate(num1, num2, operator) {
+    let ans;
     switch (operator) {
         case 'add':
-            updateContent((add(n1, n2)).toString(), true);
+            ans = add(num1, num2).toString();
             break;
         case 'subtract':
-            updateContent((subtract(n1, n2)).toString(), true);
+            ans = subtract(num1, num2).toString();
             break;
         case 'multiply':
-            updateContent((multiply(n1, n2)).toString(), true);
+            ans = multiply(num1, num2).toString();
             break;
         case 'divide':
-            updateContent((divide(n1, n2)).toString(), true);
+            ans = divide(num1, num2).toString();
             break;
         default:
             if (operator === undefined || n1 === undefined) {
@@ -93,6 +99,9 @@ function operate(n1, n2, operator) {
                 calculationHeader.innerHTML = n2;
             }
     }
+    n1 = ans;
+    updateContent(ans, true);
+    reset(true);
 }
 
 // add DOM event
