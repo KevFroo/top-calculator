@@ -49,6 +49,14 @@ function updateN(arg) {
     updateContent(arg, false);
 }
 
+function updateOperator(op) {
+    if (operator !== undefined && n2 !== undefined) {
+        operate(parseFloat(n1), parseFloat(n2), operator);
+    } else {
+        operator = op;
+    }
+}
+
 // update content in calculation header
 function updateContent(arg, reset) {
     if (reset) {
@@ -109,7 +117,7 @@ for (let num of numBtn) {
     num.onclick = () => updateN(num.classList[1]);
 }
 for (let btn of operatorBtn) {
-    btn.onclick = () => operator = btn.classList[1];
+    btn.onclick = () => updateOperator(btn.classList[1]);
 }
 clearBtn.onclick = () => clear();
 enterBtn.onclick = () => operate(parseFloat(n1), parseFloat(n2), operator);
