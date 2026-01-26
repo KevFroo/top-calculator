@@ -52,6 +52,7 @@ function updateN(arg) {
 function updateOperator(op) {
     if (operator !== undefined && n2 !== undefined) {
         operate(parseFloat(n1), parseFloat(n2), operator);
+        operator = op;
     } else {
         operator = op;
     }
