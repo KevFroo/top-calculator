@@ -24,6 +24,26 @@ let n2 = parseFloat(prompt("n2"));
 alert(multiply(n1, n2));
 */
 
+// declare variables
 let n1;
 let operator;
 let n2;
+
+function operate(n1, n2, operator) {
+    switch (operator) {
+        case 'add':
+            return add(n1, n2);
+            break;
+        case 'subtract':
+            return subtract(n1, n2);
+            break;
+        case 'multiply':
+            return multiply(n1, n2);
+            break;
+        case 'divide':
+            return divide(n1, n2);
+            break;
+        default:
+            return;
+    }
+}
