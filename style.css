@@ -1,0 +1,73 @@
+body {
+    background-color: rgb(115, 115, 115);
+    display: flex;
+    font-family: 'Handjet', 'Courier New', monospace;
+    justify-content: center;
+}
+
+button {
+    background-color: rgb(82, 82, 82);
+    font-family: 'Handjet', 'Courier New', monospace;
+    font-size: 30px;
+    flex-grow: 1;
+}
+
+.buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.calculator {
+    background-color: rgb(43, 43, 43);
+    border: 4px solid black;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    height: 60vh;
+    padding: 20px;
+    width: 50vh;
+}
+
+.content {
+    align-items: center;
+    background-color: rgb(59, 80, 63);
+    border: 4px solid black;
+    border-radius: 4px;
+    color: rgb(8, 24, 4);
+    display: flex;
+    font-size: 30px;
+    height: 10vh;
+    justify-content: flex-start;
+    padding-left: 20px;
+}
+
+.numpad {
+    border: 3px solid black;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 40vh;
+    width: 36vh;
+}
+
+.numpad button {
+    font-size: 60px;
+}
+
+.operator {
+    border: 3px solid black;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    height: 40vh;
+}
+
+.row {
+    display: flex;
+    flex: auto;
+    justify-content: space-between;
+}
