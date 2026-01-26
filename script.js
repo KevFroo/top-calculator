@@ -45,9 +45,10 @@ let n2;
 
 // html elements
 const calculationHeader = document.querySelector('.calculation');
-
 const numBtn = document.querySelectorAll('.num');
 const operatorBtn = document.querySelectorAll('.op')
+const clearBtn = document.querySelector('.clear');
+const enterBtn = document.querySelector('.enter');
 
 // update variables based on availability
 function updateN(arg) {
@@ -90,7 +91,7 @@ function clear() {
 for (let num of numBtn) {
     num.onclick = () => updateN(num.classList[1]);
 }
-
 for (let btn of operatorBtn) {
     btn.onclick = () => operator = btn.classList[1];
 }
+clearBtn.onclick = () => clear();
