@@ -18,17 +18,12 @@ function divide(n1, n2) {
     return Math.round((n1 / n2) * 1000) / 1000;
 }
 
-/*
-let n1 = parseFloat(prompt("n1"));
-let n2 = parseFloat(prompt("n2"));
-alert(multiply(n1, n2));
-*/
-
 // declare variables
 let n1;
 let operator;
 let n2;
 
+// operate calculations depending on operator
 function operate(n1, n2, operator) {
     switch (operator) {
         case 'add':
