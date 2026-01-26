@@ -23,3 +23,7 @@ let n1 = parseFloat(prompt("n1"));
 let n2 = parseFloat(prompt("n2"));
 alert(multiply(n1, n2));
 */
+
+let n1;
+let operator;
+let n2;
