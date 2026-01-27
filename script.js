@@ -79,6 +79,9 @@ function updateContent(arg, reset) {
         calculationHeader.innerHTML = arg.toString();
     } else {
         calculationHeader.innerHTML += arg.toString();
+    }
+
+    if (hasDecimal(parseFloat(calculationHeader.innerHTML))) {
         let valueSplit = calculationHeader.innerHTML;
         valueSplit = valueSplit.split('.');
         if (valueSplit[1].length > 6) {
