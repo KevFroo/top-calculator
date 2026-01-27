@@ -43,7 +43,7 @@ const enterBtn = document.querySelector('.enter');
 
 // update variables based on availability
 function updateN(arg) {
-    if ((isAns && operator === undefined) || arg === 'ERROR') {
+    if ((isAns && operator === undefined) || calculationHeader.innerHTML === 'ERROR') {
         clear();
         n1 = arg;
     } else if (operator === undefined || n1 === undefined) {
@@ -65,7 +65,7 @@ function updateN(arg) {
 }
 
 function updateOperator(op) {
-    if (operator !== undefined && n2 !== undefined) {
+    if ((operator !== undefined && n2 !== undefined) && calculationHeader.innerHTML !== 'ERROR') {
         operate(parseFloat(n1), parseFloat(n2), operator);
         operator = op;
     } else {
