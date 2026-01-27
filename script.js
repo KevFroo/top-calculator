@@ -27,6 +27,7 @@ function divide(n1, n2) {
 let n1;
 let operator;
 let n2;
+let isAns = false;
 
 // html elements
 const calculationHeader = document.querySelector('.calculation');
@@ -37,7 +38,7 @@ const enterBtn = document.querySelector('.enter');
 
 // update variables based on availability
 function updateN(arg) {
-    if (operator === undefined && n1 !== undefined && n1 !== 'Error') {
+    if (isAns && operator === undefined) {
         clear();
         n1 = arg;
     } else if (operator === undefined || n1 === undefined) {
@@ -54,6 +55,7 @@ function updateN(arg) {
             n2 += arg;
         }
     }
+    isAns = false;
     updateContent(arg, false);
 }
 
@@ -76,7 +78,7 @@ function updateContent(arg, reset) {
 }
 
 // reset var to undefined
-function reset(isAns) {
+function reset() {
     if (isAns) {
         operator = undefined;
         n2 = undefined;
@@ -90,7 +92,7 @@ function reset(isAns) {
 // clear all var and calculation header
 function clear() {
     calculationHeader.innerHTML = '';
-    reset(false);
+    reset();
 }
 
 // operate calculations depending on operator
@@ -118,9 +120,10 @@ function operate(num1, num2, operator) {
             }
     }
 
+    isAns = true;
     n1 = ans;
     updateContent(ans, true);
-    reset(true);
+    reset();
 }
 
 // add DOM event
