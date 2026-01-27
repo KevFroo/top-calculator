@@ -31,6 +31,10 @@ button {
     width: 50vh;
 }
 
+.calculation {
+    overflow: scroll;
+}
+
 .content {
     align-items: center;
     background-color: rgb(59, 80, 63);
@@ -41,7 +45,7 @@ button {
     font-size: 30px;
     height: 10vh;
     justify-content: flex-start;
-    padding-left: 20px;
+    padding: 0px 20px;
 }
 
 .numpad {

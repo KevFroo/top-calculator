@@ -1,16 +1,16 @@
 // return the sum of two numbers
 function add(n1, n2) {
-    return Math.round((n1 + n2) * 1000) / 1000;
+    return n1 + n2;
 }
 
 // return the difference
 function subtract(n1, n2) {
-    return Math.round((n1 - n2) * 1000) / 1000;
+    return n1 - n2;
 }
 
 // return the product of two numbers
 function multiply(n1, n2) {
-    return Math.round((n1 * n2) * 1000) / 1000;
+    return n1 * n2;
 }
 
 // return the fraction of two numbers
@@ -19,8 +19,13 @@ function divide(n1, n2) {
         alert('Can\'t divide by zero');
         return 'ERROR';
     } else {
-        return Math.round((n1 / n2) * 1000) / 1000;
+        return n1 / n2;
     }
+}
+
+// check for decimals
+function hasDecimal(n) {
+    return !Number.isInteger(n);
 }
 
 // declare variables
@@ -38,7 +43,7 @@ const enterBtn = document.querySelector('.enter');
 
 // update variables based on availability
 function updateN(arg) {
-    if (isAns && operator === undefined) {
+    if ((isAns && operator === undefined) || arg === 'ERROR') {
         clear();
         n1 = arg;
     } else if (operator === undefined || n1 === undefined) {
@@ -74,6 +79,11 @@ function updateContent(arg, reset) {
         calculationHeader.innerHTML = arg.toString();
     } else {
         calculationHeader.innerHTML += arg.toString();
+        let valueSplit = calculationHeader.innerHTML;
+        valueSplit = valueSplit.split('.');
+        if (valueSplit[1].length > 6) {
+            calculationHeader.innerHTML = Math.round((parseFloat(calculationHeader.innerHTML) * 1000000)) / 1000000;
+        }
     }
 }
 
