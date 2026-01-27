@@ -82,7 +82,7 @@ function updateOperator(op) {
 }
 
 // update content in calculation header
-function updateContent(arg, reset, speical) {
+function updateContent(arg, reset, special) {
     if (reset) {
         calculationHeader.innerHTML = arg.toString();
     } else if (special) {
