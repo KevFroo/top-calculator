@@ -15,7 +15,12 @@ function multiply(n1, n2) {
 
 // return the fraction of two numbers
 function divide(n1, n2) {
-    return Math.round((n1 / n2) * 1000) / 1000;
+    if (n2 === 0) {
+        alert('Can\'t divide by zero');
+        return 'ERROR';
+    } else {
+        return Math.round((n1 / n2) * 1000) / 1000;
+    }
 }
 
 // declare variables
@@ -32,7 +37,10 @@ const enterBtn = document.querySelector('.enter');
 
 // update variables based on availability
 function updateN(arg) {
-    if (operator === undefined || n1 === undefined) {
+    if (operator === undefined && n1 !== undefined && n1 !== 'Error') {
+        clear();
+        n1 = arg;
+    } else if (operator === undefined || n1 === undefined) {
         if (n1 === undefined) {
             n1 = arg;
         } else {
@@ -88,6 +96,7 @@ function clear() {
 // operate calculations depending on operator
 function operate(num1, num2, operator) {
     let ans;
+
     switch (operator) {
         case 'add':
             ans = add(num1, num2).toString();
@@ -108,6 +117,7 @@ function operate(num1, num2, operator) {
                 calculationHeader.innerHTML = n2;
             }
     }
+
     n1 = ans;
     updateContent(ans, true);
     reset(true);
@@ -121,4 +131,8 @@ for (let btn of operatorBtn) {
     btn.onclick = () => updateOperator(btn.classList[1]);
 }
 clearBtn.onclick = () => clear();
-enterBtn.onclick = () => operate(parseFloat(n1), parseFloat(n2), operator);
+enterBtn.onclick = () => {
+    if(n1 !== undefined && n2 !== undefined && operator !== undefined) {
+        operate(parseFloat(n1), parseFloat(n2), operator);
+    }
+};
