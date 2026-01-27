@@ -42,26 +42,34 @@ const clearBtn = document.querySelector('.clear');
 const enterBtn = document.querySelector('.enter');
 
 // update variables based on availability
-function updateN(arg) {
-    if ((isAns && operator === undefined) || calculationHeader.innerHTML === 'ERROR') {
+function updateN(arg, special) {
+    if (((isAns && operator === undefined) || calculationHeader.innerHTML === 'ERROR') && !special) {
         clear();
         n1 = arg;
     } else if (operator === undefined || n1 === undefined) {
         if (n1 === undefined) {
             n1 = arg;
         } else {
-            n1 += arg;
+            if (special) {
+                n1 = arg + n1;
+            } else {
+                n1 += arg;
+            }
         }
     } else {
         if (n2 === undefined) {
             calculationHeader.innerHTML = '';
             n2 = arg;
         } else {
-            n2 += arg;
+            if (special) {
+                n2 = arg + n2;
+            } else {
+                n2 += arg;
+            }
         }
     }
     isAns = false;
-    updateContent(arg, false);
+    updateContent(arg, false, special);
 }
 
 function updateOperator(op) {
@@ -74,9 +82,11 @@ function updateOperator(op) {
 }
 
 // update content in calculation header
-function updateContent(arg, reset) {
+function updateContent(arg, reset, speical) {
     if (reset) {
         calculationHeader.innerHTML = arg.toString();
+    } else if (special) {
+        calculationHeader.innerHTML = arg.toString() + calculationHeader.innerHTML;
     } else {
         calculationHeader.innerHTML += arg.toString();
     }
@@ -94,13 +104,13 @@ function updateContent(arg, reset) {
 function specialN(arg) {
     if (arg === '.') {
         if (!hasDecimal(parseFloat(calculationHeader.innerHTML))) {
-            updateN(arg);
+            updateN(arg, false);
         }
-    } /*else {
+    } else {
         if (parseFloat(calculationHeader.innerHTML) >= 0) {
-            
+            updateN(arg, true);
         }
-    }*/
+    }
 }
 
 // reset var to undefined
@@ -148,7 +158,7 @@ function operate(num1, num2, operator) {
 
     isAns = true;
     n1 = ans;
-    updateContent(ans, true);
+    updateContent(ans, true, false);
     reset();
 }
 
@@ -157,7 +167,7 @@ for (let btn of numBtn) {
     if (btn.classList[1] === 'special') {
         btn.onclick = () => specialN(btn.classList[2]);
     } else {
-        btn.onclick = () => updateN(btn.classList[1]);
+        btn.onclick = () => updateN(btn.classList[1], false);
     }
 }
 for (let btn of operatorBtn) {
