@@ -90,6 +90,19 @@ function updateContent(arg, reset) {
     }
 }
 
+// handles special conditions with '-' and '.'
+function specialN(arg) {
+    if (arg === '.') {
+        if (!hasDecimal(parseFloat(calculationHeader.innerHTML))) {
+            updateN(arg);
+        }
+    } /*else {
+        if (parseFloat(calculationHeader.innerHTML) >= 0) {
+            
+        }
+    }*/
+}
+
 // reset var to undefined
 function reset() {
     if (isAns) {
@@ -140,8 +153,12 @@ function operate(num1, num2, operator) {
 }
 
 // add DOM event
-for (let num of numBtn) {
-    num.onclick = () => updateN(num.classList[1]);
+for (let btn of numBtn) {
+    if (btn.classList[1] === 'special') {
+        btn.onclick = () => specialN(btn.classList[2]);
+    } else {
+        btn.onclick = () => updateN(btn.classList[1]);
+    }
 }
 for (let btn of operatorBtn) {
     btn.onclick = () => updateOperator(btn.classList[1]);
