@@ -107,7 +107,7 @@ function specialN(arg) {
             updateN(arg, false);
         }
     } else {
-        if (parseFloat(calculationHeader.innerHTML) >= 0) {
+        if (parseFloat(calculationHeader.innerHTML) > 0) {
             updateN(arg, true);
         }
     }
