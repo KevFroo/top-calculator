@@ -7,7 +7,7 @@ body {
 
 button {
     background-color: rgb(82, 82, 82);
-    font-family: 'Handjet', 'Courier New', monospace;
+    font: inherit;
     font-size: 30px;
     flex-grow: 1;
 }

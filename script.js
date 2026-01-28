@@ -35,25 +35,33 @@ const numBtn = document.querySelectorAll('.num');
 const operatorBtn = document.querySelectorAll('.op')
 const clearBtn = document.querySelector('.clear');
 const enterBtn = document.querySelector('.enter');
+const delBtn = document.querySelector('.del');
 
 // update variables based on availability
 function updateN(arg) {
-    const isSpecial = arg.includes('-');
+    const isNegative = arg.includes('-');
+    const isDel = arg.includes('del');
     content = arg;
 
-    if (((isAns && operator === undefined) || calculationHeader.innerHTML === 'ERROR')) {
+    if (((isAns && operator === undefined && !isNegative && !isDel) || calculationHeader.innerHTML === 'ERROR')) {
         clear();
         n1 = arg;
     } else if (operator === undefined) {
         if (n1 === undefined) {
             n1 = arg;
         } else {
-            if (isSpecial && !n1.includes('-')) {
+            if (isNegative && !n1.includes('-')) {
                 n1 = '-' + n1;
                 content = n1;
-            } else if (isSpecial && n1.includes('-')) {
+            } else if (isNegative && n1.includes('-')) {
                 n1 = n1.slice(1);
                 content = n1;
+            } else if (isDel) {
+                n1 = n1.slice(0, -1);
+                if (n1 === '-' || n1 === undefined) {
+                    n1 = undefined;
+                    content = '';
+                }
             } else {
                 n1 += arg;
             }
@@ -63,19 +71,25 @@ function updateN(arg) {
             calculationHeader.innerHTML = '';
             n2 = arg;
         } else {
-            if (isSpecial && !n2.includes('-')) {
+            if (isNegative && !n2.includes('-')) {
                 n2 = '-' + n2;
                 content = n2;
-            } else if (isSpecial && n2.includes('-')) {
+            } else if (isNegative && n2.includes('-')) {
                 n2 = n2.slice(1);
                 content = n2;
+            } else if (isDel) {
+                n2 = n2.slice(0, -1);
+                if (n2 === '-' || n2 === undefined) {
+                    n2 = undefined;
+                    content = '';
+                }
             } else {
                 n2 += arg;
             }
         }
     }
     isAns = false;
-    updateContent(content, isSpecial);
+    updateContent(content, isNegative);
 }
 
 function updateOperator(op) {
@@ -89,11 +103,12 @@ function updateOperator(op) {
 
 // update content in calculation header
 function updateContent(arg, reset) {
-    const isSpecial = arg.includes('-');
-    if (reset) {
+    const isDel = arg.includes('del');
+
+    if (reset || arg === '') {
         calculationHeader.innerHTML = arg.toString();
-    } else if (isSpecial) {
-        calculationHeader.innerHTML = arg.toString() + calculationHeader.innerHTML;
+    } else if (isDel) {
+        calculationHeader.innerHTML = calculationHeader.innerHTML.slice(0, -1);
     } else {
         calculationHeader.innerHTML += arg.toString();
     }
@@ -114,7 +129,9 @@ function specialN(arg) {
             updateN(arg);
         }
     } else {
-        updateN(arg);
+        if (calculationHeader.innerHTML !== '') {
+            updateN(arg);
+        }
     }
 }
 
@@ -184,3 +201,4 @@ enterBtn.onclick = () => {
         operate(parseFloat(n1), parseFloat(n2), operator);
     }
 };
+delBtn.onclick = () => updateN('del');
