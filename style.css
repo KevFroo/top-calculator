@@ -54,6 +54,7 @@ button {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    flex: 1;
     height: 40vh;
     width: 36vh;
 }
@@ -74,4 +75,8 @@ button {
     display: flex;
     flex: auto;
     justify-content: space-between;
+}
+
+.row button{
+    flex: 1;
 }
